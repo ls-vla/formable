@@ -27,7 +27,9 @@ If no output is provided Formable will return the form object, otherwise, will a
 `var form = new Formable(formJSON, 'output');`
 
 ## credits  
-[Vladimir Suarez](https://github.com/ls-vla)
++ [Vladimir Suarez](https://github.com/ls-vla)
++ [Ricardo Bello](https://github.com/ricardoaandres)
+
 
 ## MIT licence
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
