@@ -12,7 +12,7 @@
   THE SOFTWARE.
 */
 
-(function(global, undefined) {
+(function (window, $, undefined) {
 
   var builder = {
 
@@ -44,12 +44,26 @@
       fieldAttributes.id = (typeof data.id == undefined) ? fieldAttributes.id = data.label : fieldAttributes.id = data.id;
       fieldAttributes.name = (typeof data.name == undefined) ? fieldAttributes.name = data.label : fieldAttributes.name = data.name;
       fieldAttributes.class = (typeof data.class == undefined) ? inputBootstrapClass : inputBootstrapClass + ' ' + data.class;
-      
+
       // Text Field
       if (fieldsetType == 'text') {
         // Set type and create field container with bootstrap class
-        fieldAttributes.type = fieldsetType; 
+        fieldAttributes.type = fieldsetType;
         $field = this.fieldContainer();
+        // Append label and input to field container
+        $field.append(jQuery('<label>', {for: data.label, text: data.label}));
+        $field.append(jQuery('<input>', fieldAttributes));
+      }
+
+      // Range Field
+      if (fieldsetType === 'range') {
+        fieldAttributes.type = fieldsetType;
+        $field = this.fieldContainer();
+
+        fieldAttributes.min = data.min;
+        fieldAttributes.max = data.max;
+        fieldAttributes.step = data.step;
+
         // Append label and input to field container
         $field.append(jQuery('<label>', {for: data.label, text: data.label}));
         $field.append(jQuery('<input>', fieldAttributes));
@@ -64,7 +78,7 @@
         }else{
           fieldAttributes.rows = data.rows;
         }
-          
+
         $field = this.fieldContainer();
         // Append label and input to field container
         $field.append(jQuery('<label>', {for: data.label, text: data.label}));
@@ -86,7 +100,7 @@
         // Set type and create field container with bootstrap class
         fieldAttributes.type = fieldsetType;
         fieldAttributes.name = data.label;
-        fieldAttributes.class = '';            
+        fieldAttributes.class = '';
         $field = this.fieldContainer();
 
         jQuery.each(data.values, function(index, value){
@@ -100,7 +114,7 @@
           }else{
             $radioLabel.append(jQuery('<input>', fieldAttributes));
           }
-            
+
           $radioLabel.append(value[0]);
           $radioContainer.append($radioLabel);
 
@@ -198,12 +212,12 @@
       }
 
       elementsList.push(jQuery('<button>', {type: 'submit', class: 'btn btn-default', text: data.submitText}));
-      
+
       // Append Elements
       jQuery.each(elementsList, function(index, $element) {
         $form.append($element);
       });
-      
+
       if (this.container != null) {
         this.container.append($form);
       }
@@ -221,7 +235,7 @@
     if (this.container) {
       jQuery(this.container).append(form);
     }else{
-      return form; 
+      return form;
     }
   }
 
@@ -236,7 +250,7 @@
     }
 
     builderResult = this.builder.form(formData);
-    
+
     return builderResult.content;
   }
 
@@ -250,6 +264,6 @@
 
   Formable.prototype.builder = builder;
 
-  global.Formable = Formable;
+  window.Formable = Formable;
 
-})(this);
+})(window, jQuery);
