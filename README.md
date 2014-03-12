@@ -26,12 +26,28 @@ If no output is provided Formable will return the form object, otherwise, will a
 ###### make magic
 `var form = new Formable(formJSON, 'output');`
 
+## Contributing
+To contribute to Formable we advice you to:
++ `fork`
++ `branch`
++ `code`
++ `commit`
++ `push`
++ `pull request`
+
+Formable relies on Node.js and Grunt. You may need to install [node.js](http://nodejs.org) and Grunt `npm install -g grunt-cli`.
++ `npm install`
++ `grunt jasmine`
++ `grunt http-server`
+
+Remember to run your tests before opening your pull request.
+
 ## credits  
 + [Vladimir Suarez](https://github.com/ls-vla)
-+ [Ricardo Bello](https://github.com/ricardoaandres)
++ [Ricardo Andrés Bello](https://github.com/ricardoaandres)
 
 
-## MIT licence
+## MIT license
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
