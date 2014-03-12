@@ -49,6 +49,9 @@
       if (fieldsetType == 'text') {
         // Set type and create field container with bootstrap class
         fieldAttributes.type = fieldsetType;
+        if(data.answer){
+          fieldAttributes.value = data.answer
+        }
         $field = this.fieldContainer();
         // Append label and input to field container
         $field.append(jQuery('<label>', {for: data.label, text: data.label}));
@@ -66,7 +69,11 @@
 
         // Append label and input to field container
         $field.append(jQuery('<label>', {for: data.label, text: data.label}));
-        $field.append(jQuery('<input>', fieldAttributes));
+        var slider = jQuery('<input>', fieldAttributes)
+        if(data.answer){
+            jQuery(slider).val(data.answer)
+        }
+        $field.append(slider);
       }
 
       // Text Area
@@ -82,7 +89,12 @@
         $field = this.fieldContainer();
         // Append label and input to field container
         $field.append(jQuery('<label>', {for: data.label, text: data.label}));
-        $field.append(jQuery('<textarea>', fieldAttributes));
+        var textarea = jQuery('<textarea>', fieldAttributes)
+        if(data.answer){
+            // Add default value if any
+            textarea.val(data.answer)
+        }
+        $field.append(textarea);
       }
 
       // Radio Buttons and Checkboxes
@@ -102,8 +114,9 @@
         fieldAttributes.name = data.label;
         fieldAttributes.class = '';
         $field = this.fieldContainer();
-
+        
         $field.append(jQuery('<label>', {for: data.label, text: data.label}));
+
 
         jQuery.each(data.values, function(index, value){
 
@@ -111,7 +124,19 @@
           $radioContainer = jQuery('<div>', {class: fieldsetType});
           $radioLabel = jQuery('<label>');
 
+          var answers = []
+          if(data["answer"]){
+            if(typeof(data["answer"]) == "string"){
+                answers = JSON.parse(data["answer"])
+            }
+            else{
+                answers = data["answer"]
+            }
+          }
+
           if (index==0 && fieldsetType == 'radio') {
+            $radioLabel.append(jQuery('<input>', jQuery.extend({}, fieldAttributes, {checked: 'checked'})));
+          }else if (answers.indexOf(index) >= 0){
             $radioLabel.append(jQuery('<input>', jQuery.extend({}, fieldAttributes, {checked: 'checked'})));
           }else{
             $radioLabel.append(jQuery('<input>', fieldAttributes));
