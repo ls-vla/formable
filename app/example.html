@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id='output'></div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src='formable.js'></script>
+	<script>
+		var form = new Formable({'form':{'title':'titulo','url':'url','containerId':'id','id':'id','class':'class','submitText':'honey','fieldset':[{'type':'text','label':'Brand','name':'brand','id':'brand','class':'class'},{'type':'text','label':'Model','name':'model','id':'model','class':'class'},{'type':'range','label':'Year','name':'brand','id':'brand','class':'class', 'max': 10, 'min': 2, 'step': 2},{'type':'radio','label':'Engine','name':'engine','id':'engine','class':'class','values':[['4L',1],['6L',2],['8L',3],['V6',4],['V8',5],['V10',6],['V12',7],['Rotatory',8]]}]}}, 'output');
+	</script>
+</body>
+</html>
