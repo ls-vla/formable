@@ -103,6 +103,8 @@
         fieldAttributes.class = '';
         $field = this.fieldContainer();
 
+        $field.append(jQuery('<label>', {for: data.label, text: data.label}));
+
         jQuery.each(data.values, function(index, value){
 
           fieldAttributes.value = value[1];
