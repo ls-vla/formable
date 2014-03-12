@@ -3,8 +3,8 @@ describe("formable", function() {
   var formJSON = {
     'form':{
       //Form Data
-      'title':'titulo',
-      'url':'url',
+      'title':'title',
+      'url':'/submit_url',
       'containerId':'id',
       'id':'id',
       'class':'class',
@@ -38,14 +38,21 @@ describe("formable", function() {
   }
 
   var form = new Formable(formJSON, 'output');
-  var formData = form.getJSON();
 
-  it("contains a class named 'class' ", function() {
-    expect(formData.form.class).toEqual('class');
+  it("contains a title named 'title' ", function() {
+    expect($(form).attr('id')).toEqual('id');
   });
 
-  it("contains a id named 'class' ", function() {
-    expect(formData.form.class).toEqual('class');
+  it("contains a class named 'class' ", function() {
+    expect($(form).attr('class')).toEqual('class');
+  });
+
+  it("contains a url named '/submit_url' ", function() {
+    expect($(form).attr('url')).toEqual('/submit_url');
+  });
+
+  it("contains a title named 'title' ", function() {
+    expect($(form).find('legend').text()).toEqual('title');
   });
 
 })
