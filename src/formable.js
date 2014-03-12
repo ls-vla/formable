@@ -259,7 +259,9 @@
   }
 
   Formable.prototype.setContainer = function(container) {
-    this.container = jQuery('#' + container);
+    if(container){
+      this.container = jQuery('#' + container);
+    }
   }
 
   Formable.prototype.builder = builder;
