@@ -220,9 +220,8 @@
 
     if (this.container) {
       jQuery(this.container).append(form);
-    }else{
-      return form; 
     }
+    return form; 
   }
 
   Formable.prototype.generateForm = function() {
