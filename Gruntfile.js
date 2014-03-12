@@ -5,7 +5,7 @@ module.exports = function (grunt) {
 
     'http-server': {
       dev: {
-        root: '/',
+        root: 'app/',
         port: 9000,
         host: '127.0.0.1',
         cache: 300,
@@ -13,6 +13,17 @@ module.exports = function (grunt) {
         autoIndex: true,
         defaultExt: 'html',
         runInBackground: false
+      }
+    },
+
+    jasmine: {
+      jstrees: {
+        src: 'app/js/*.js',
+        options: {
+          vendor: 'app/vendor/jquery-1.10.2/jquery.min.js',
+          specs: 'spec/*Spec.js',
+          helpers: 'spec/*Helper.js'
+        }
       }
     }
   });
