@@ -67,6 +67,8 @@
         fieldAttributes.min = data.min;
         fieldAttributes.max = data.max;
         fieldAttributes.step = data.step;
+        fieldAttributes.name = data.name;
+        fieldAttributes.value = data.value;
 
         // Append label and input to field container
         $field.append($('<label>', {for: data.label, text: data.label}));
@@ -81,11 +83,15 @@
       if (fieldsetType == 'textarea') {
         // Set type and create field container with bootstrap class
         fieldAttributes.type = fieldsetType;
+
         if (typeof data.rows === 'undefined') {
           fieldAttributes.rows = 5;
         }else{
           fieldAttributes.rows = data.rows;
         }
+
+        fieldAttributes.name = data.name;
+        fieldAttributes.value = data.value;
 
         $field = this.fieldContainer();
         // Append label and input to field container
