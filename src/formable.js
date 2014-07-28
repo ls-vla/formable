@@ -80,7 +80,7 @@
       }
 
       // Text Area
-      if (fieldsetType == 'textarea') {
+      if (fieldsetType === 'textarea') {
         // Set type and create field container with bootstrap class
         fieldAttributes.type = fieldsetType;
 
@@ -91,13 +91,12 @@
         }
 
         fieldAttributes.name = data.name;
-        fieldAttributes.value = data.value;
 
         $field = this.fieldContainer();
         // Append label and input to field container
         $field.append($('<label>', {for: data.label, text: data.label}));
 
-        var textarea = $('<textarea>', fieldAttributes)
+        var textarea = $('<textarea>', fieldAttributes).text(fieldAttributes.value);
 
         if(data.answer){
           // Add default value if any
