@@ -116,26 +116,30 @@
         // Set type and create field container with bootstrap class
         fieldAttributes.type = fieldsetType;
         fieldAttributes.name = data.label;
-        fieldAttributes.checked = data.checked;
         fieldAttributes.class = '';
         $field = this.fieldContainer();
 
         $field.append($('<label>', {for: data.label, text: data.label}));
 
-
         $.each(data.values, function(index, value){
+          fieldAttributes.checked = false;
+
+          if (value.length >= 3) {
+            fieldAttributes.checked = 'checked';
+          }
 
           fieldAttributes.value = value[1];
           $radioContainer = $('<div>', {class: fieldsetType});
           $radioLabel = $('<label>');
 
-          var answers = []
+          var answers = [];
+
           if(data["answer"]){
             if(typeof(data["answer"]) === "string"){
-                answers = JSON.parse(data["answer"])
+              answers = JSON.parse(data["answer"])
             }
             else{
-                answers = data["answer"]
+              answers = data["answer"]
             }
           }
 
