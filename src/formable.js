@@ -17,7 +17,7 @@
   var builder = {
 
     fieldContainer: function() {
-      return jQuery('<div>', {class: 'form-group'});
+      return $('<div>', {class: 'form-group'});
     },
 
     field: function(data) {
@@ -54,8 +54,8 @@
         }
         $field = this.fieldContainer();
         // Append label and input to field container
-        $field.append(jQuery('<label>', {for: data.label, text: data.label}));
-        $field.append(jQuery('<input>', fieldAttributes));
+        $field.append($('<label>', {for: data.label, text: data.label}));
+        $field.append($('<input>', fieldAttributes));
       }
 
       // Range Field
@@ -68,10 +68,10 @@
         fieldAttributes.step = data.step;
 
         // Append label and input to field container
-        $field.append(jQuery('<label>', {for: data.label, text: data.label}));
-        var slider = jQuery('<input>', fieldAttributes)
+        $field.append($('<label>', {for: data.label, text: data.label}));
+        var slider = $('<input>', fieldAttributes)
         if(data.answer){
-            jQuery(slider).val(data.answer)
+          $(slider).val(data.answer)
         }
         $field.append(slider);
       }
@@ -88,11 +88,11 @@
 
         $field = this.fieldContainer();
         // Append label and input to field container
-        $field.append(jQuery('<label>', {for: data.label, text: data.label}));
-        var textarea = jQuery('<textarea>', fieldAttributes)
+        $field.append($('<label>', {for: data.label, text: data.label}));
+        var textarea = $('<textarea>', fieldAttributes)
         if(data.answer){
-            // Add default value if any
-            textarea.val(data.answer)
+          // Add default value if any
+          textarea.val(data.answer)
         }
         $field.append(textarea);
       }
@@ -115,14 +115,14 @@
         fieldAttributes.class = '';
         $field = this.fieldContainer();
 
-        $field.append(jQuery('<label>', {for: data.label, text: data.label}));
+        $field.append($('<label>', {for: data.label, text: data.label}));
 
 
-        jQuery.each(data.values, function(index, value){
+        $.each(data.values, function(index, value){
 
           fieldAttributes.value = value[1];
-          $radioContainer = jQuery('<div>', {class: fieldsetType});
-          $radioLabel = jQuery('<label>');
+          $radioContainer = $('<div>', {class: fieldsetType});
+          $radioLabel = $('<label>');
 
           var answers = []
           if(data["answer"]){
@@ -135,11 +135,11 @@
           }
 
           if (index==0 && fieldsetType == 'radio') {
-            $radioLabel.append(jQuery('<input>', jQuery.extend({}, fieldAttributes, {checked: 'checked'})));
+            $radioLabel.append($('<input>', $.extend({}, fieldAttributes, {checked: 'checked'})));
           }else if (answers.indexOf(index) >= 0){
-            $radioLabel.append(jQuery('<input>', jQuery.extend({}, fieldAttributes, {checked: 'checked'})));
+            $radioLabel.append($('<input>', $.extend({}, fieldAttributes, {checked: 'checked'})));
           }else{
-            $radioLabel.append(jQuery('<input>', fieldAttributes));
+            $radioLabel.append($('<input>', fieldAttributes));
           }
 
           $radioLabel.append(value[0]);
@@ -163,10 +163,10 @@
       }
 
       // Fieldset Variables
-      var $fieldset = jQuery('<fieldset>'),
+      var $fieldset = $('<fieldset>'),
           fieldsetResult = {status: 'ok'};
 
-      jQuery.each(data.fieldset, function(index, field){
+      $.each(data.fieldset, function(index, field){
         var fieldAttributes = {}, // Loop Variables
             builderResult = builder.field(field); // Build Field Calling to Form.builder.field
 
@@ -200,7 +200,7 @@
       if (typeof data.title === 'undefined' ) {
         return { status: 'error', content: 'Missing Property: Data has no form.title attribute' }
       }else{
-        elementsList.push(jQuery('<legend>', {text: data.title}));
+        elementsList.push($('<legend>', {text: data.title}));
       }
 
       // Add url attribute
@@ -221,7 +221,7 @@
       }
 
       // Build Form with formAttributes options
-      $form = jQuery('<form>', formAttributes);
+      $form = $('<form>', formAttributes);
 
       // Add Fieldset (Calling to Form.builder.fieldset)
       builderResult = this.fieldset(data);
@@ -238,10 +238,10 @@
         data.submitText = 'Send';
       }
 
-      elementsList.push(jQuery('<button>', {type: 'submit', class: 'btn btn-default', text: data.submitText}));
+      elementsList.push($('<button>', {type: 'submit', class: 'btn btn-default', text: data.submitText}));
 
       // Append Elements
-      jQuery.each(elementsList, function(index, $element) {
+      $.each(elementsList, function(index, $element) {
         $form.append($element);
       });
 
@@ -260,7 +260,7 @@
     form = this.generateForm();
 
     if (this.container) {
-      jQuery(this.container).append(form);
+      $(this.container).append(form);
     }
 
     return form;
@@ -287,7 +287,7 @@
 
   Formable.prototype.setContainer = function(container) {
     if(container){
-      this.container = jQuery('#' + container);
+      this.container = $('#' + container);
     }
   }
 
