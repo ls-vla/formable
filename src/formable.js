@@ -29,13 +29,13 @@
 
       // Validate Field
       if (typeof data.type === 'undefined') {
-        return { status: 'error', content: 'Missing Property: Data has no form.fieldset[listElementIndex].type' }
+        throw new Error('Missing Property: Data has no form.fieldset[listElementIndex].type');
       }else{
         fieldsetType = data.type;
       }
 
       if (typeof data.label === 'undefined') {
-        return { status: 'error', content: 'Missing Property: Data has no form.fieldset[listElementIndex].label' }
+        throw new Error('Missing Property: Data has no form.fieldset[listElementIndex].label');
       }else{
         fieldsetLabel = data.label;
       }
@@ -44,6 +44,7 @@
       fieldAttributes.id = (typeof data.id === 'undefined') ? fieldAttributes.id = data.label : fieldAttributes.id = data.id;
       fieldAttributes.name = (typeof data.name === 'undefined') ? fieldAttributes.name = data.label : fieldAttributes.name = data.name;
       fieldAttributes.class = (typeof data.class === 'undefined') ? inputBootstrapClass : inputBootstrapClass + ' ' + data.class;
+      fieldAttributes.value = (typeof data.value === 'undefined') ? '' : data.value;
 
       // Text Field
       if (fieldsetType == 'text') {
@@ -89,11 +90,14 @@
         $field = this.fieldContainer();
         // Append label and input to field container
         $field.append($('<label>', {for: data.label, text: data.label}));
+
         var textarea = $('<textarea>', fieldAttributes)
+
         if(data.answer){
           // Add default value if any
           textarea.val(data.answer)
         }
+
         $field.append(textarea);
       }
 
@@ -101,17 +105,18 @@
       if (fieldsetType == 'radio' || fieldsetType == 'checkbox') {
         // Validate Values
         if (typeof data.values === 'undefined') {
-          return { status: 'error', content: 'Missing Property: Data has no form.fieldset[listElementIndex].values' }
+          throw new Error('Missing Property: Data has no form.fieldset[listElementIndex].values');
         }
 
         if (data.values.length < 1) {
-          return { status: 'error', content: 'Invalid: form.fieldset[listElementIndex].values attribute has no elements' }
+          throw new Error('Invalid: form.fieldset[listElementIndex].values attribute has no elements');
         }
 
 
         // Set type and create field container with bootstrap class
         fieldAttributes.type = fieldsetType;
         fieldAttributes.name = data.label;
+        fieldAttributes.checked = data.checked;
         fieldAttributes.class = '';
         $field = this.fieldContainer();
 
@@ -126,7 +131,7 @@
 
           var answers = []
           if(data["answer"]){
-            if(typeof(data["answer"]) == "string"){
+            if(typeof(data["answer"]) === "string"){
                 answers = JSON.parse(data["answer"])
             }
             else{
@@ -134,7 +139,7 @@
             }
           }
 
-          if (index==0 && fieldsetType == 'radio') {
+          if (index === 0 && fieldsetType === 'radio') {
             $radioLabel.append($('<input>', $.extend({}, fieldAttributes, {checked: 'checked'})));
           }else if (answers.indexOf(index) >= 0){
             $radioLabel.append($('<input>', $.extend({}, fieldAttributes, {checked: 'checked'})));
@@ -155,11 +160,11 @@
     fieldset: function(data) {
       // Validate Fieldset
       if (typeof data.fieldset === 'undefined') {
-        return { status: 'error', content: 'Missing Property: Data has no form.fieldset attribute' }
+        throw new Error('Missing Property: Data has no form.fieldset attribute');
       }
 
       if (data.fieldset.length < 1) {
-        return { status: 'error', content: 'Invalid: form.fieldset attribute has no elements' }
+        throw new Error('Invalid: form.fieldset attribute has no elements');
       }
 
       // Fieldset Variables
@@ -170,7 +175,7 @@
         var fieldAttributes = {}, // Loop Variables
             builderResult = builder.field(field); // Build Field Calling to Form.builder.field
 
-        if (builderResult.status == 'error') {
+        if (builderResult.status === 'error') {
           fieldsetResult.status = 'error';
           fieldsetResult.content = builderResult.content;
           return {}
@@ -179,7 +184,7 @@
         $fieldset.append(builderResult.content);
       });
 
-      if (fieldsetResult.status == 'ok') {
+      if (fieldsetResult.status === 'ok') {
         fieldsetResult.content = $fieldset;
       }else{
         fieldsetResult;
@@ -198,14 +203,14 @@
 
       // Set form legend
       if (typeof data.title === 'undefined' ) {
-        return { status: 'error', content: 'Missing Property: Data has no form.title attribute' }
+        throw new Error('Missing Property: Data has no form.title attribute');
       }else{
         elementsList.push($('<legend>', {text: data.title}));
       }
 
       // Add url attribute
       if (typeof data.url === 'undefined' ) {
-        return { status: 'error', content: 'Missing Property: Data has no form.url attribute' }
+        throw new Error('Missing Property: Data has no form.url attribute');
       }else{
         formAttributes.url = data.url;
       }
@@ -273,7 +278,7 @@
 
     // Return error when form not exist
     if (typeof formData === 'undefined' ) {
-      return 'Missing Property: Data has no form attribute'
+      throw new Error('Missing Property: Data has no form attribute');
     }
 
     builderResult = this.builder.form(formData);
