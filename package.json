@@ -1,6 +1,6 @@
 {
   "name": "formable",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "JSON2HTML form builder. Made in Acid Labs with plenty of Love.",
   "author": {
     "name": ["Ricardo Andrés Bello", "Vladimir Suarez"],

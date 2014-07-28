@@ -1,6 +1,6 @@
-# Formable
+# formable.js
 
-Formable is a JSON2HTML form builder. It relies on jQuery to provide an easy way to work with dynamic forms.
+Formable is a JSON2HTML form builder. It relies on jQuery to provide an easy way to work with dynamic forms. The next major version will be jQuery-Independent.
 
 ## basics
 Formable accepts two parameters:
@@ -8,22 +8,86 @@ Formable accepts two parameters:
 + json: REQUIRED.
 + output: OPTIONAL.
 
-If no output is provided Formable will return the form object, otherwise, will append it to the element with the ID specified.
+If no output is provided Formable will return the form object, otherwise, will search for the element matching the output selector.
 
-## example JSON
-`{'form':{'title':'titulo','url':'url','containerId':'id','id':'id','class':'class','submitText':'honey','fieldset':[{'type':'text','label':'Brand','name':'brand','id':'brand','class':'class'},{'type':'text','label':'Model','name':'model','id':'model','class':'class'},{'type':'radio','label':'Engine','name':'engine','id':'engine','class':'class','values':[['4L',1],['6L',2],['8L',3],['V6',4],['V8',5],['V10',6],['V12',7],['Rotatory',8]]}]}}`
+## supported form fields
+
+tag      | type     | attributes
+---------|----------|-----------------------------------------------------
+form     |          | `title`, `url`, `id`, `class`, `submitText`
+input    | text     | `label`, `name`, `id`, `class`, `value`
+input    | radio    | `label`, `name`, `id`, `class`, `values`
+input    | checkbox | `label`, `name`, `id`, `class`, `values`
+input    | range    | `label`, `name`, `id`, `class`, `min`, `max`, `step`, `value`
+textarea |          | `label`, `name`, `id`, `class`, `rows`, `value`
+
+## sample JSON
+*Can also be found in* `sample_json.json`
+
+```
+{
+  'form': {
+    'title': 'Register your Vehicle',
+    'url': '/register',
+    'id': 'register-vehicle-form',
+    'class': 'register-vehicle-form',
+    'submitText': 'Register',
+    'fieldset': [
+      {
+        'type': 'text',
+        'label': 'Brand/Manufacturer',
+        'id': 'manufacturer',
+        'name': 'manufacturer',
+        'class': '',
+        'value': 'Ford'
+      },
+      {
+        'type': 'text',
+        'label': 'Model',
+        'name': 'model',
+        'id': 'model',
+        'class': '',
+        'value': 'Mustang'
+      },
+      {
+        'type': 'radio',
+        'label': 'Engine',
+        'name': 'engine',
+        'id': 'engine',
+        'class': '',
+        'values': [
+          ['Single-Cylinder', 1],
+          ['3L', 2],
+          ['4L', 3],
+          ['5L', 4, 'checked'],
+          ['6L', 5],
+          ['8L', 6],
+          ['V2', 7],
+          ['V4', 8],
+          ['V6', 9],
+          ['V8', 10],
+          ['V10', 11],
+          ['V12', 12],
+          ['Rotatory', 13]
+        ]
+      }
+    ]
+  }
+}
+
+```
 
 ## usage
 ###### import jQuery
 `<script src='http://code.jquery.com/jquery-1.11.0.min.js'></script>`
 
-###### import it
-`<script src='formable.js'></script>`
+###### import formable
+`<script src='js/formable.js'></script>`
 
 ###### get JSON
 `var formJSON = {}`
 
-###### make magic
+###### make some magic
 `var form = new Formable(formJSON, 'output');`
 
 ## Contributing
@@ -31,16 +95,15 @@ To contribute to Formable we advice you to:
 + `fork`
 + `branch`
 + `code`
++ `jasmine test (green)`
 + `commit`
 + `push`
 + `pull request`
 
-Formable relies on Node.js and Grunt. You may need to install [node.js](http://nodejs.org) and Grunt `npm install -g grunt-cli`.
+To run Jasmine and the http-server you may need to install *node.js* and/or *Grunt*, `npm install -g grunt-cli`.
 + `npm install`
 + `grunt jasmine`
 + `grunt http-server`
-
-Remember to run your tests before opening your pull request.
 
 ## credits  
 + [Vladimir Suarez](https://github.com/ls-vla)

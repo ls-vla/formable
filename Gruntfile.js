@@ -17,7 +17,7 @@ module.exports = function (grunt) {
     },
 
     jasmine: {
-      jstrees: {
+      formable: {
         src: 'app/js/*.js',
         options: {
           vendor: 'app/vendor/jquery-1.10.2/jquery.min.js',
