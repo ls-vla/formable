@@ -6,9 +6,92 @@
 <body>
 	<div id='output'></div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src='formable.js'></script>
+	<script src='js/formable.js'></script>
 	<script>
-		var form = new Formable({'form':{'title':'titulo','url':'url','containerId':'id','id':'id','class':'class','submitText':'honey','fieldset':[{'type':'text','label':'Brand','name':'brand','id':'brand','class':'class'},{'type':'text','label':'Model','name':'model','id':'model','class':'class'},{'type':'range','label':'Year','name':'brand','id':'brand','class':'class', 'max': 10, 'min': 2, 'step': 2},{'type':'radio','label':'Engine','name':'engine','id':'engine','class':'class','values':[['4L',1],['6L',2],['8L',3],['V6',4],['V8',5],['V10',6],['V12',7],['Rotatory',8]]}]}}, 'output');
+		var json = {
+			'form': {
+				'title': 'Register your Vehicle',
+				'url': '/register',
+				'id': 'register-vehicle-form',
+				'class': 'register-vehicle-form',
+				'submitText': 'Register',
+				'fieldset': [
+					{
+						'type': 'text',
+						'label': 'Brand/Manufacturer',
+						'id': 'manufacturer',
+						'name': 'manufacturer',
+						'class': '',
+						'value': 'Ford'
+					},
+					{
+						'type': 'text',
+						'label': 'Model',
+						'name': 'model',
+						'id': 'model',
+						'class': '',
+						'value': 'Mustang'
+					},
+					{
+						'type': 'range',
+						'label': 'Year',
+						'name': 'year',
+						'id': 'year',
+						'class': '',
+						'min': 1920,
+						'max': 2014,
+						'step': 1,
+						'value': 1967
+					},
+					{
+						'type': 'radio',
+						'label': 'Engine',
+						'name': 'engine',
+						'id': 'engine',
+						'class': '',
+						'values': [
+							['Single-Cylinder', 1],
+							['3L', 2],
+							['4L', 3],
+							['5L', 4, 'checked'],
+							['6L', 5],
+							['8L', 6],
+							['V2', 7],
+							['V4', 8],
+							['V6', 9],
+							['V8', 10],
+							['V10', 11],
+							['V12', 12],
+							['Rotatory', 13]
+						]
+					},
+					{
+						'type': 'textarea',
+						'label': 'Some description',
+						'name': 'description',
+						'id': 'description',
+						'class': '',
+						'value': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+					},
+					{
+						'type': 'checkbox',
+						'label': 'Extra features',
+						'name': 'features',
+						'id': 'features',
+						'class': '',
+						'values': [
+							['20\' Rims', 1],
+							['ABS', 2, 'checked'],
+							['Fat Rear Tires', 3],
+							['Two Tone Paint', 4, 'checked'],
+							['Trunk Audio', 5]
+						]
+					}
+				]
+			}
+		};
+
+		var form = new Formable(json, 'output');
 	</script>
 </body>
 </html>
