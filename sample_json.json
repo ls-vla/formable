@@ -23,6 +23,17 @@
         'value': 'Mustang'
       },
       {
+        'type': 'range',
+        'label': 'Year'
+        'name': 'year',
+        'id': 'year',
+        'class': '',
+        'min': 1920,
+        'max': 2014,
+        'step': 1,
+        'value': 1967
+      },
+      {
         'type': 'radio',
         'label': 'Engine',
         'name': 'engine',
@@ -43,6 +54,14 @@
           ['V12', 12],
           ['Rotatory', 13]
         ]
+      },
+      {
+        'type': 'textarea',
+        'label': 'Some description',
+        'name': 'description',
+        'id': 'description',
+        'class': '',
+        'value': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
       }
     ]
   }
