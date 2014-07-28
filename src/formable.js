@@ -1,7 +1,7 @@
 /*
   FORMABLE
 
-  authors: Vladimir Suarez
+  authors: Ricardo Andrés Bello, Vladimir Suarez
 
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -28,22 +28,22 @@
           inputBootstrapClass = 'form-control';
 
       // Validate Field
-      if (typeof data.type == undefined) {
+      if (typeof data.type === 'undefined') {
         return { status: 'error', content: 'Missing Property: Data has no form.fieldset[listElementIndex].type' }
       }else{
         fieldsetType = data.type;
       }
 
-      if (typeof data.label == undefined) {
+      if (typeof data.label === 'undefined') {
         return { status: 'error', content: 'Missing Property: Data has no form.fieldset[listElementIndex].label' }
       }else{
         fieldsetLabel = data.label;
       }
 
       // Add Field Attributes
-      fieldAttributes.id = (typeof data.id == undefined) ? fieldAttributes.id = data.label : fieldAttributes.id = data.id;
-      fieldAttributes.name = (typeof data.name == undefined) ? fieldAttributes.name = data.label : fieldAttributes.name = data.name;
-      fieldAttributes.class = (typeof data.class == undefined) ? inputBootstrapClass : inputBootstrapClass + ' ' + data.class;
+      fieldAttributes.id = (typeof data.id === 'undefined') ? fieldAttributes.id = data.label : fieldAttributes.id = data.id;
+      fieldAttributes.name = (typeof data.name === 'undefined') ? fieldAttributes.name = data.label : fieldAttributes.name = data.name;
+      fieldAttributes.class = (typeof data.class === 'undefined') ? inputBootstrapClass : inputBootstrapClass + ' ' + data.class;
 
       // Text Field
       if (fieldsetType == 'text') {
@@ -80,7 +80,7 @@
       if (fieldsetType == 'textarea') {
         // Set type and create field container with bootstrap class
         fieldAttributes.type = fieldsetType;
-        if (typeof data.rows == undefined) {
+        if (typeof data.rows === 'undefined') {
           fieldAttributes.rows = 5;
         }else{
           fieldAttributes.rows = data.rows;
@@ -100,7 +100,7 @@
       // Radio Buttons and Checkboxes
       if (fieldsetType == 'radio' || fieldsetType == 'checkbox') {
         // Validate Values
-        if (typeof data.values == undefined) {
+        if (typeof data.values === 'undefined') {
           return { status: 'error', content: 'Missing Property: Data has no form.fieldset[listElementIndex].values' }
         }
 
@@ -114,7 +114,7 @@
         fieldAttributes.name = data.label;
         fieldAttributes.class = '';
         $field = this.fieldContainer();
-        
+
         $field.append(jQuery('<label>', {for: data.label, text: data.label}));
 
 
@@ -197,26 +197,26 @@
           builderResult  = {};
 
       // Set form legend
-      if (typeof data.title == undefined ) {
+      if (typeof data.title === 'undefined' ) {
         return { status: 'error', content: 'Missing Property: Data has no form.title attribute' }
       }else{
         elementsList.push(jQuery('<legend>', {text: data.title}));
       }
 
       // Add url attribute
-      if (typeof data.url == undefined ) {
+      if (typeof data.url === 'undefined' ) {
         return { status: 'error', content: 'Missing Property: Data has no form.url attribute' }
       }else{
         formAttributes.url = data.url;
       }
 
       // Add id attribute (Optional)
-      if (!(typeof data.id == undefined)) {
+      if (!(typeof data.id === 'undefined')) {
         formAttributes.id = data.id;
       }
 
       // Add class attribute (Optional)
-      if (!(typeof data.class == undefined)) {
+      if (!(typeof data.class === 'undefined')) {
         formAttributes.class = data.class;
       }
 
@@ -233,7 +233,7 @@
       }
 
       // Set submit button
-      if (typeof data.submitText == undefined) {
+      if (typeof data.submitText === 'undefined') {
         // TODO: Do stuff for not hardcode english text
         data.submitText = 'Send';
       }
@@ -262,8 +262,8 @@
     if (this.container) {
       jQuery(this.container).append(form);
     }
-    
-    return form; 
+
+    return form;
   }
 
   Formable.prototype.generateForm = function() {
@@ -272,7 +272,7 @@
         $form = null;
 
     // Return error when form not exist
-    if (typeof formData == undefined ) {
+    if (typeof formData === 'undefined' ) {
       return 'Missing Property: Data has no form attribute'
     }
 
